@@ -5,11 +5,12 @@ namespace Kata.LeapYears
     [TestFixture]
     public class LeapYearsValidatorShould
     {
-        [Test]
-        public void ValidateLeapYears()
+        [TestCase(2000, true)]
+        [TestCase(2019, false)]
+        [TestCase(1800, false)]
+        public void ValidateLeapYears(int year, bool isLeapYear)
         {
-            Assert.That(LeapYearsValidator.IsLeapYear(2000), Is.EqualTo(true));
-            Assert.That(LeapYearsValidator.IsLeapYear(2019), Is.EqualTo(false));
+            Assert.That(LeapYearsValidator.IsLeapYear(year), Is.EqualTo(isLeapYear));
         }
     }
 
@@ -17,7 +18,15 @@ namespace Kata.LeapYears
     {
         public static bool IsLeapYear(int year)
         {
-            return year % 4 == 0;
+            if (!YearIsDivisibleBy(year, 4)) return false;
+            if (YearIsDivisibleBy(year, 100) && !YearIsDivisibleBy(year, 400)) return false;
+
+            return true;
+        }
+
+        private static bool YearIsDivisibleBy(int year, int divisor)
+        {
+            return year % divisor == 0;
         }
     }
 }
