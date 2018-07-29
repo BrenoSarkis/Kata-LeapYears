@@ -9,6 +9,7 @@ namespace Kata.LeapYears
         public void ValidateLeapYears()
         {
             Assert.That(LeapYearsValidator.IsLeapYear(2000), Is.EqualTo(true));
+            Assert.That(LeapYearsValidator.IsLeapYear(2019), Is.EqualTo(false));
         }
     }
 
@@ -16,7 +17,7 @@ namespace Kata.LeapYears
     {
         public static bool IsLeapYear(int year)
         {
-            return true;
+            return year % 4 == 0;
         }
     }
 }
